@@ -4,11 +4,11 @@ class Plant:
         self.height = height
         self.age = age
 
-    def show(self):
+    def show(self) -> None:
         print(f"{self.name}: {self.height:0.1f}cm, {self.age} days old")
 
 
-ft_garden_growth()
+def ft_garden_growth() -> None:
 
 
 if __name__ == "__main__":
