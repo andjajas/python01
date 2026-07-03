@@ -6,7 +6,10 @@ class Plant:
         self.plant_age = plant_age
 
     def show(self) -> None:
-        print(f"{self.name}: {self.height:0.1f}cm, {self.plant_age} days old")
+        print(
+            f"Created: {self.name}: {self.height:0.1f}cm, "
+            f"{self.plant_age} days old"
+        )
 
     def grow(self) -> float:
         self.height += 0.8
@@ -17,19 +20,19 @@ class Plant:
         return self.plant_age
 
 
-def ft_plant_growth() -> None:
+def ft_plant_factory() -> None:
     rose = Plant("rose", 25, 30)
-    print("=== Garden Plant Growth ===")
+    oak = Plant("oak", 200, 365)
+    cactus = Plant("cactus", 5, 90)
+    sunflower = Plant("sunflower", 80, 45)
+    fern = Plant("fern", 15, 120)
+    print("=== Plant Factory Output ===")
     rose.show()
-    start_height = rose.height
-    for day in range(1, 8):
-        rose.grow()
-        rose.age()
-        print(f"=== Day {day} ===")
-        rose.show()
-    week_growth = rose.height - start_height
-    print(f"Growth this week: {week_growth:0.1f}")
+    oak.show()
+    cactus.show()
+    sunflower.show()
+    fern.show()
 
 
 if __name__ == "__main__":
-    ft_plant_growth()
+    ft_plant_factory()
