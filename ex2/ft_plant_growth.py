@@ -11,7 +11,8 @@ class Plant:
     def grow(self) -> float:
         self.height += 0.8
         return self.height
-
+# better to not hardcode the growth rate with 0.8 to prepare for different
+# plant types
     def age(self) -> int:
         self.plant_age += 1
         return self.plant_age

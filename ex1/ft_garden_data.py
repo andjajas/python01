@@ -8,7 +8,8 @@ class Plant:
     def show(self) -> None:
         print(f"{self.name}: {self.height}cm, {self.age} days old")
 
-
+# maybe not capitalize it from the start in the class for name
+# sometimes in ex5 a lowercase is needed for a plantname
 def ft_garden_data() -> None:
     rose = Plant("rose", 25, 30)
     sunflower = Plant("sunflower", 80, 45)
