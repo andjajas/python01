@@ -39,6 +39,18 @@ class Plant:
     def get_age(self) -> int:
         return self._plant_age
 
+    def show_state(self) -> None:
+        print(
+            f"\nCurrent state: {self._name}: {self.get_height():0.1f}cm, "
+            f"{self.get_age()} days old"
+        )
+
+    # def show_state(self) -> None:
+    #     print(
+    #         f"\nCurrent state: {self._name}: {self._height:0.1f}cm, "
+    #         f"{self._plant_age} days old"
+    #     )
+
 
 def ft_garden_security() -> None:
     rose = Plant("rose", 15, 10)
@@ -50,10 +62,12 @@ def ft_garden_security() -> None:
     print()
     rose.set_height(-10)
     rose.set_age(-10)
-    print(
-        f"\nCurrent state: {rose._name}: {rose._height:0.1f}cm, "
-        f"{rose._plant_age} days old"
-    )
+    rose.show_state()
+    # print(
+    #     f"\nCurrent state: {rose._name}: {rose._height:0.1f}cm, "
+    #     f"{rose._plant_age} days old"
+    # )
+    # print(f"\n{rose.get_age()}")
 
 
 if __name__ == "__main__":
