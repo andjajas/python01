@@ -29,7 +29,7 @@ class Plant:
         self._plant_age += 1
         return self._plant_age
 
-    def set_age(self, new_plant_age) -> None:
+    def set_age(self, new_plant_age: int) -> None:
         if new_plant_age < 0:
             print("Error, age can't be negative\nAge update rejected")
         else:
