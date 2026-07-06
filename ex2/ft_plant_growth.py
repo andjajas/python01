@@ -1,25 +1,28 @@
 #!/usr/bin/env python3
 class Plant:
-    def __init__(self, name: str, height: float, plant_age: int):
-        self.name = name.capitalize()
-        self.height = height
-        self.plant_age = plant_age
+    name = "plant"
+    height = 0
+    plant_age = 0
+    growth_rate = 0
 
     def show(self) -> None:
         print(f"{self.name}: {self.height:0.1f}cm, {self.plant_age} days old")
 
     def grow(self) -> float:
-        self.height += 0.8
+        self.height += self.growth_rate
         return self.height
-# better to not hardcode the growth rate with 0.8 to prepare for different
-# plant types
+
     def age(self) -> int:
         self.plant_age += 1
         return self.plant_age
 
 
 def ft_plant_growth() -> None:
-    rose = Plant("rose", 25, 30)
+    rose = Plant()
+    rose.name = "rose".capitalize()
+    rose.height = 25
+    rose.plant_age = 30
+    rose.growth_rate = 0.8
     print("=== Garden Plant Growth ===")
     rose.show()
     start_height = rose.height

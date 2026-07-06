@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 class Plant:
-    def __init__(self, name: str, height: float, plant_age: int):
-        self.name = name.capitalize()
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        plant_age: int,
+        growth_rate: float = 0.8,
+         ):
+        self.name = name
         self.height = height
         self.plant_age = plant_age
+        self.growth_rate = growth_rate
 
     def show(self) -> None:
         print(
@@ -12,7 +19,7 @@ class Plant:
         )
 
     def grow(self) -> float:
-        self.height += 0.8
+        self.height += self.growth_rate
         return self.height
 
     def age(self) -> int:
@@ -21,11 +28,11 @@ class Plant:
 
 
 def ft_plant_factory() -> None:
-    rose = Plant("rose", 25, 30)
-    oak = Plant("oak", 200, 365)
-    cactus = Plant("cactus", 5, 90)
-    sunflower = Plant("sunflower", 80, 45)
-    fern = Plant("fern", 15, 120)
+    rose = Plant("rose".capitalize(), 25, 30)
+    oak = Plant("oak".capitalize(), 200, 365)
+    cactus = Plant("cactus".capitalize(), 5, 90)
+    sunflower = Plant("sunflower".capitalize(), 80, 45)
+    fern = Plant("fern".capitalize(), 15, 120)
     print("=== Plant Factory Output ===")
     rose.show()
     oak.show()

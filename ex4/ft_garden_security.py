@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 class Plant:
-    def __init__(self, name: str, height: float, plant_age: int):
-        self._name = name.capitalize()
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        plant_age: int,
+        growth_rate: float = 0.8
+         ):
+        self._name = name
         self._height = height
         self._plant_age = plant_age
-
-    def show(self) -> None:
-        print(
-            f"Plant created: {self._name}: {self._height:0.1f}cm, "
-            f"{self._plant_age} days old"
-        )
+        self._growth_rate = growth_rate
 
     def grow(self) -> float:
-        self._height += 0.8
-        return self._height
+        self.height += self.growth_rate
+        return self.height
 
     def set_height(self, new_height: float) -> None:
         if new_height < 0:
@@ -39,9 +40,17 @@ class Plant:
     def get_age(self) -> int:
         return self._plant_age
 
+    def show(self) -> None:
+        print(
+            f"Plant created: {self._name.capitalize()}: "
+            f"{self.get_height():0.1f}cm, "
+            f"{self.get_age()} days old"
+        )
+
     def show_state(self) -> None:
         print(
-            f"\nCurrent state: {self._name}: {self.get_height():0.1f}cm, "
+            f"\nCurrent state: {self._name.capitalize()}: "
+            f"{self.get_height():0.1f}cm, "
             f"{self.get_age()} days old"
         )
 
@@ -63,11 +72,6 @@ def ft_garden_security() -> None:
     rose.set_height(-10)
     rose.set_age(-10)
     rose.show_state()
-    # print(
-    #     f"\nCurrent state: {rose._name}: {rose._height:0.1f}cm, "
-    #     f"{rose._plant_age} days old"
-    # )
-    # print(f"\n{rose.get_age()}")
 
 
 if __name__ == "__main__":
