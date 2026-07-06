@@ -7,14 +7,10 @@ class Plant:
         plant_age: int,
         growth_rate: float = 0.8
          ):
-        self._name = name
+        self.name = name
         self._height = height
         self._plant_age = plant_age
         self._growth_rate = growth_rate
-
-    def grow(self) -> float:
-        self.height += self.growth_rate
-        return self.height
 
     def set_height(self, new_height: float) -> None:
         if new_height < 0:
@@ -26,37 +22,44 @@ class Plant:
     def get_height(self) -> float:
         return self._height
 
-    def age(self) -> int:
-        self._plant_age += 1
-        return self._plant_age
+    def grow(self) -> float:
+        new_height = self.get_height() + self.growth_rate
+        self.set_height(new_height)
+        return self.get_height()
 
-    def set_age(self, new_plant_age: int) -> None:
-        if new_plant_age < 0:
+    def set_age(self, new_age: int) -> None:
+        if new_age < 0:
             print("Error, age can't be negative\nAge update rejected")
         else:
-            self._plant_age = new_plant_age
+            self._plant_age = new_age
             print(f"Age updated: {self._plant_age} days")
 
     def get_age(self) -> int:
         return self._plant_age
 
+    def age(self) -> int:
+        new_age = self.get_age() + 1
+        self.set_age(new_age)
+        return self.get_age()
+
     def show(self) -> None:
         print(
-            f"Plant created: {self._name.capitalize()}: "
+            f"Plant created: {self.name.capitalize()}: "
             f"{self.get_height():0.1f}cm, "
             f"{self.get_age()} days old"
         )
 
     def show_state(self) -> None:
         print(
-            f"\nCurrent state: {self._name.capitalize()}: "
+            f"\nCurrent state: {self.name.capitalize()}: "
             f"{self.get_height():0.1f}cm, "
             f"{self.get_age()} days old"
         )
 
     # def show_state(self) -> None:
     #     print(
-    #         f"\nCurrent state: {self._name}: {self._height:0.1f}cm, "
+    #         f"\nCurrent state: {self.name.capitalize()}: "
+    #         f"{self._height:0.1f}cm, "
     #         f"{self._plant_age} days old"
     #     )
 
