@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 class Plant:
-    name = "plant"
-    height = 0
-    plant_age = 0
-    growth_rate = 0
+    name: str = "plant"
+    height: float = 0
+    plant_age: int = 0
+    growth_rate: float = 0
 
     def show(self) -> None:
         print(f"{self.name}: {self.height:0.1f}cm, {self.plant_age} days old")

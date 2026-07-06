@@ -5,12 +5,10 @@ class Plant:
         name: str,
         height: float,
         plant_age: int,
-        growth_rate: float = 0.8
          ):
         self.name = name
         self._height = height
         self._plant_age = plant_age
-        self._growth_rate = growth_rate
 
     def set_height(self, new_height: float) -> None:
         if new_height < 0:
@@ -22,8 +20,8 @@ class Plant:
     def get_height(self) -> float:
         return self._height
 
-    def grow(self) -> float:
-        new_height = self.get_height() + self.growth_rate
+    def grow(self, growth_rate: float = 0.8) -> float:
+        new_height = self.get_height() + growth_rate
         self.set_height(new_height)
         return self.get_height()
 
