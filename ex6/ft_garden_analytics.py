@@ -88,34 +88,68 @@ class Flower(Plant):
         height: float,
         plant_age: int,
         color: str
-         ):
+         ) -> None:
         super().__init__(name, height, plant_age)
         self.color = color
+        self.is_bloomed: bool = False
 
     def show(self) -> None:
         super().show()
         print(f" Color: {self.color}")
-
-    def bloom(self, bloomed: bool) -> None:
-        if not bloomed:
-            self.show()
+        if not self.is_bloomed:
             print(f" {self.name.capitalize()} has not bloomed yet")
         else:
-            print(f"[asking the {self.name} to bloom]")
-            self.show()
             print(f" {self.name.capitalize()} is blooming beautifully!")
+
+    def bloom(self) -> None:
+        if not self.is_bloomed:
+            self.is_bloomed = True
+            print(f"[asking the {self.name} to grow and bloom]")
+
+
+class Seed(Flower):
+    def __init__(
+        self,
+        name: str,
+        height: float,
+        plant_age: int,
+        color: str
+         ) -> None:
+        super().__init__(name, height, plant_age, color)
+        self.count: int = 0
+
+    def show(self) -> None:
+        super().show()
+        if not self.is_bloomed:
+            print(f" Seeds: {self.count}")
+        else:
+            self.count += 42
+            print(f" Seeds: {self.count}")
 
 
 class Tree(Plant):
+    class TreeStats(Plant.Stats):
+        def __init__(self) -> None:
+            super().__init__()
+            self._shade_count: int = 0
+
+        def add_to_shade_count(self) -> None:
+            self._shade_count += 1
+
+        def show_stats(self) -> None:
+            super().show_stats()
+            print(f" {self._shade_count} shade")
+
     def __init__(
         self,
         name: str,
         height: float,
         plant_age: int,
         trunk_diameter: float
-         ):
+         ) -> None:
         super().__init__(name, height, plant_age)
         self.trunk_diameter = trunk_diameter
+        self._stats = Tree.TreeStats()
 
     def show(self) -> None:
         super().show()
@@ -123,7 +157,7 @@ class Tree(Plant):
 
     def produce_shade(self, shade: bool) -> None:
         if shade:
-            self.show()
+            self._stats.add_to_shade_count()
             print(f"[asking the {self.name} to produce shade]")
             print(
                 f"Tree {self.name.capitalize()} now produces a shade of "
@@ -140,7 +174,7 @@ class Vegetable(Plant):
         plant_age: int,
         harvest_season: str,
         nutritional_value: int
-         ):
+         ) -> None:
         super().__init__(name, height, plant_age)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
@@ -163,6 +197,12 @@ class Vegetable(Plant):
 
 
 def ft_garden_analytics() -> None:
+    print("=== Tree")
+    oak = Tree("oak", 200, 365, 5)
+    oak.show()
+    oak._stats.show_stats()
+    oak.produce_shade(True)
+    oak._stats.show_stats()
     print("=== Anonymous")
     anonymous = Plant.create_plant()
     anonymous.show()
