@@ -1,14 +1,37 @@
 #!/usr/bin/env python3
 class Plant:
+    class Stats:
+        def __init__(self) -> None:
+            self._grow_count: int = 0
+            self._age_count: int = 0
+            self._show_count: int = 0
+
+        def add_to_grow_count(self) -> None:
+            self._grow_count += 1
+
+        def add_to_age_count(self) -> None:
+            self._age_count += 1
+
+        def add_to_show_count(self) -> None:
+            self._show_count += 1
+        
+        def show_stats(self) -> None:
+            print(
+                f"Stats: {self._grow_count} grow, "
+                f"{self._age_count} age, "
+                f"{self._show_count} show"
+            )
+
     def __init__(
         self,
         name: str,
         height: float,
         plant_age: int,
-         ):
+         ) -> None:
         self.name = name
         self._height = height
         self._plant_age = plant_age
+        self._stats = Plant.Stats()
 
     def set_height(self, new_height: float) -> None:
         if new_height < 0:
@@ -23,6 +46,7 @@ class Plant:
     def grow(self, growth_rate: float = 0.8) -> float:
         new_height = self.get_height() + growth_rate
         self.set_height(new_height)
+        self._stats.add_to_grow_count()
         return self.get_height()
 
     def set_age(self, new_age: int) -> None:
@@ -38,30 +62,25 @@ class Plant:
     def age(self) -> int:
         new_age = self.get_age() + 1
         self.set_age(new_age)
+        self._stats.add_to_age_count()
         return self.get_age()
 
     def show(self) -> None:
+        self._stats.add_to_show_count()
         print(
             f"{self.name.capitalize()}: "
             f"{self.get_height():0.1f}cm, "
             f"{self.get_age()} days old"
         )
 
-    def show_state(self) -> None:
-        print(
-            f"\nCurrent state: {self.name.capitalize()}: "
-            f"{self.get_height():0.1f}cm, "
-            f"{self.get_age()} days old"
-        )
 
     @staticmethod
     def older_than_year(age: int) -> bool:
         return age > 365
 
-    @classmethod
     def create_plant(cls) -> "Plant":
-        return cls("Unknown plant", 0.0, 0)
-
+        return cls("Unknown plant", float(0), 0)
+    create_plant = classmethod(create_plant)
 
 
 class Flower(Plant):
@@ -146,6 +165,7 @@ class Vegetable(Plant):
 
 
 def ft_garden_analytics() -> None:
+    print("=== Anonymous")
     anonymous = Plant.create_plant()
     anonymous.show()
 
