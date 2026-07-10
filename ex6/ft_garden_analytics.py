@@ -54,9 +54,14 @@ class Plant:
             f"{self.get_age()} days old"
         )
 
-	@staticmethod
-    def older_than_year(age):
+    @staticmethod
+    def older_than_year(age: int) -> bool:
         return age > 365
+
+    @classmethod
+    def create_plant(cls) -> "Plant":
+        return cls("Unknown plant", 0.0, 0)
+
 
 
 class Flower(Plant):
@@ -68,11 +73,11 @@ class Flower(Plant):
         color: str
          ):
         super().__init__(name, height, plant_age)
-        self._color = color
+        self.color = color
 
     def show(self) -> None:
         super().show()
-        print(f" Color: {self._color}")
+        print(f" Color: {self.color}")
 
     def bloom(self, bloomed: bool) -> None:
         if not bloomed:
@@ -93,11 +98,11 @@ class Tree(Plant):
         trunk_diameter: float
          ):
         super().__init__(name, height, plant_age)
-        self._trunk_diameter = trunk_diameter
+        self.trunk_diameter = trunk_diameter
 
     def show(self) -> None:
         super().show()
-        print(f" Trunk diameter: {self._trunk_diameter:0.1f}cm")
+        print(f" Trunk diameter: {self.trunk_diameter:0.1f}cm")
 
     def produce_shade(self, shade: bool) -> None:
         if shade:
@@ -106,7 +111,7 @@ class Tree(Plant):
             print(
                 f"Tree {self.name.capitalize()} now produces a shade of "
                 f"{self.get_height():0.1f}cm long and "
-                f"{self._trunk_diameter:0.1f}cm wide."
+                f"{self.trunk_diameter:0.1f}cm wide."
             )
 
 
@@ -120,17 +125,17 @@ class Vegetable(Plant):
         nutritional_value: int
          ):
         super().__init__(name, height, plant_age)
-        self._harvest_season = harvest_season
-        self._nutritional_value = nutritional_value
+        self.harvest_season = harvest_season
+        self.nutritional_value = nutritional_value
 
     def show(self) -> None:
         super().show()
-        print(f" Harvest season: {self._harvest_season.capitalize()}")
-        print(f" Nutritional value: {self._nutritional_value}")
+        print(f" Harvest season: {self.harvest_season.capitalize()}")
+        print(f" Nutritional value: {self.nutritional_value}")
 
     def age(self) -> int:
         super().age()
-        self._nutritional_value += 1
+        self.nutritional_value += 1
         return self.get_age()
 
     def grow_and_age(self, days: int, growth_rate: float) -> None:
@@ -141,7 +146,9 @@ class Vegetable(Plant):
 
 
 def ft_garden_analytics() -> None:
+    anonymous = Plant.create_plant()
+    anonymous.show()
 
 
 if __name__ == "__main__":
-	ft_garden_analytics()
+    ft_garden_analytics()
