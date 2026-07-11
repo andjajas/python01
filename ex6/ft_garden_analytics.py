@@ -57,8 +57,8 @@ class Plant:
     def get_age(self) -> int:
         return self._plant_age
 
-    def age(self) -> int:
-        new_age = self.get_age() + 1
+    def age(self, days: int = 1) -> int:
+        new_age = self.get_age() + days
         self.set_age(new_age)
         self._stats.add_to_age_count()
         return self.get_age()
@@ -118,13 +118,15 @@ class Seed(Flower):
         super().__init__(name, height, plant_age, color)
         self.count: int = 0
 
+    def bloom(self) -> None:
+        already_bloomed = self.is_bloomed
+        super().bloom()
+        if not already_bloomed:
+            self.count += 42
+
     def show(self) -> None:
         super().show()
-        if not self.is_bloomed:
-            print(f" Seeds: {self.count}")
-        else:
-            self.count += 42
-            print(f" Seeds: {self.count}")
+        print(f" Seeds: {self.count}")
 
 
 class Tree(Plant):
@@ -196,16 +198,52 @@ class Vegetable(Plant):
             self.age()
 
 
+def display_stats(a_plant: Plant) -> None:
+    print(f"[statistics for {a_plant.name}]")
+    a_plant._stats.show_stats()
+
+
 def ft_garden_analytics() -> None:
+    print("=== Garden statistics ===")
+    print("=== Check year-old")
+    print(
+        f"Is 30 days more than a year? -> "
+        f"{Plant.older_than_year(30)}"
+    )
+    print(
+        f"Is 400 days more than a year? -> "
+        f"{Plant.older_than_year(400)}"
+    )
+    print()
+    print("=== Flower")
+    rose = Flower("rose", 15, 10, "red")
+    rose.show()
+    display_stats(rose)
+    rose.grow(8)
+    rose.bloom()
+    rose.show()
+    display_stats(rose)
+    print()
     print("=== Tree")
     oak = Tree("oak", 200, 365, 5)
     oak.show()
-    oak._stats.show_stats()
+    display_stats(oak)
     oak.produce_shade(True)
-    oak._stats.show_stats()
+    display_stats(oak)
+    print()
+    print("=== Seed")
+    sunflower = Seed("sunflower", 80, 45, "yellow")
+    sunflower.show()
+    sunflower.age(20)
+    sunflower.grow(30)
+    sunflower.bloom()
+    sunflower.show()
+    display_stats(sunflower)
+    print()
     print("=== Anonymous")
     anonymous = Plant.create_plant()
     anonymous.show()
+    display_stats(anonymous)
 
 
 if __name__ == "__main__":
