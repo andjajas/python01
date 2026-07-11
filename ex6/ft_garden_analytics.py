@@ -14,7 +14,7 @@ class Plant:
 
         def add_to_show_count(self) -> None:
             self._show_count += 1
-        
+
         def show_stats(self) -> None:
             print(
                 f"Stats: {self._grow_count} grow, "
@@ -71,14 +71,13 @@ class Plant:
             f"{self.get_age()} days old"
         )
 
-
     @staticmethod
     def older_than_year(age: int) -> bool:
         return age > 365
 
+    @classmethod
     def create_plant(cls) -> "Plant":
         return cls("Unknown plant", float(0), 0)
-    create_plant = classmethod(create_plant)
 
 
 class Flower(Plant):
@@ -119,10 +118,10 @@ class Seed(Flower):
         self.count: int = 0
 
     def bloom(self) -> None:
-        already_bloomed = self.is_bloomed
-        super().bloom()
-        if not already_bloomed:
+        if not self.is_bloomed:
+            self.is_bloomed = True
             self.count += 42
+            print(f"[make {self.name} grow, age and blooom]")
 
     def show(self) -> None:
         super().show()
@@ -151,7 +150,7 @@ class Tree(Plant):
          ) -> None:
         super().__init__(name, height, plant_age)
         self.trunk_diameter = trunk_diameter
-        self._stats = Tree.TreeStats()
+        self._stats: "Tree.TreeStats" = Tree.TreeStats()
 
     def show(self) -> None:
         super().show()
@@ -186,7 +185,7 @@ class Vegetable(Plant):
         print(f" Harvest season: {self.harvest_season.capitalize()}")
         print(f" Nutritional value: {self.nutritional_value}")
 
-    def age(self) -> int:
+    def age(self, days: int = 1) -> int:
         super().age()
         self.nutritional_value += 1
         return self.get_age()
@@ -199,7 +198,7 @@ class Vegetable(Plant):
 
 
 def display_stats(a_plant: Plant) -> None:
-    print(f"[statistics for {a_plant.name}]")
+    print(f"[statistics for {a_plant.name.capitalize()}]")
     a_plant._stats.show_stats()
 
 
