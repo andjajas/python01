@@ -6,7 +6,7 @@ class Plant:
         height: float,
         plant_age: int,
         growth_rate: float = 0.8,
-         ):
+         ) -> None:
         self.name = name
         self.height = height
         self.plant_age = plant_age

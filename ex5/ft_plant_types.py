@@ -5,7 +5,7 @@ class Plant:
         name: str,
         height: float,
         plant_age: int,
-         ):
+         ) -> None:
         self.name = name
         self._height = height
         self._plant_age = plant_age
@@ -53,7 +53,7 @@ class Flower(Plant):
         height: float,
         plant_age: int,
         color: str
-         ):
+         ) -> None:
         super().__init__(name, height, plant_age)
         self.color = color
 
@@ -78,7 +78,7 @@ class Tree(Plant):
         height: float,
         plant_age: int,
         trunk_diameter: float
-         ):
+         ) -> None:
         super().__init__(name, height, plant_age)
         self.trunk_diameter = trunk_diameter
 
@@ -105,7 +105,7 @@ class Vegetable(Plant):
         plant_age: int,
         harvest_season: str,
         nutritional_value: int
-         ):
+         ) -> None:
         super().__init__(name, height, plant_age)
         self.harvest_season = harvest_season
         self.nutritional_value = nutritional_value
